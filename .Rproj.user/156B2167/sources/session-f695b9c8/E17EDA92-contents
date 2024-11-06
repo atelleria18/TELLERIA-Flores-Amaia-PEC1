@@ -1,0 +1,34 @@
+# Load required libraries
+library(readxl)
+library(SummarizedExperiment)
+
+# Load data
+file_path <- "TIO2+PTYR-human-MSS+MSIvsPD.XLSX"
+data <- read_excel(file_path)
+
+# Prepare data matrix and metadata
+data_matrix <- as.matrix(data[ , c("M1_1_MSS", "M1_2_MSS", "M5_1_MSS", "M5_2_MSS", 
+                                   "T49_1_MSS", "T49_2_MSS", "M42_1_PD", "M42_2_PD", 
+                                   "M43_1_PD", "M43_2_PD", "M64_1_PD", "M64_2_PD")])
+
+# Metadata for rows (samples)
+sample_metadata <- data.frame(
+  row.names = colnames(data_matrix),
+  condition = c(rep("MSS", 6), rep("PD", 6))
+)
+
+# Create SummarizedExperiment object
+se <- SummarizedExperiment(
+  assays = list(counts = data_matrix),
+  colData = sample_metadata
+)
+
+
+# Summary statistics
+summary(assay(se, "counts"))
+
+# Boxplot to visualize distribution
+boxplot(assay(se, "counts"))
+
+# Heatmap to explore patterns in data
+heatmap(assay(se, "counts"), Rowv = NA, Colv = NA, scale = "column")

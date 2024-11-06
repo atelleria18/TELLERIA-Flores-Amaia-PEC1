@@ -1,0 +1,7 @@
+"0",""
+"0","# Aplicar una transformación logarítmica a los datos para reducir la variabilidad"
+"0","log_counts <- log2(assay(se, ""counts"") + 1)  # +1 para evitar log(0)"
+"0",""
+"0","# Reemplazar la matriz de conteo en el objeto SummarizedExperiment"
+"0","assay(se, ""counts"") <- log_counts"
+"0",""

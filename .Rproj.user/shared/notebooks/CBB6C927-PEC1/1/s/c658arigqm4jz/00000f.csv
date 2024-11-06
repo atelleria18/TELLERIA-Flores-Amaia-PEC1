@@ -1,0 +1,7 @@
+"0","# Load required libraries"
+"0","library(readxl)"
+"0","library(SummarizedExperiment)"
+"0",""
+"0","# Load data"
+"0","file_path <- ""TIO2+PTYR-human-MSS+MSIvsPD.XLSX"""
+"0","data <- read_excel(file_path)"
